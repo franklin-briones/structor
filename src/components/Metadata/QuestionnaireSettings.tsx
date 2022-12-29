@@ -13,7 +13,15 @@ import { Extension } from '../../types/fhir';
 import { TreeContext } from '../../store/treeStore/treeStore';
 import { IExtentionType, IValueSetSystem } from '../../types/IQuestionnareItemType';
 import SwitchBtn from '../SwitchBtn/SwitchBtn';
+import CheckboxBtn from '../CheckboxBtn/CheckboxBtn';
 import { removeQuestionnaireExtension, setQuestionnaireExtension } from '../../helpers/extensionHelper';
+import {
+    isVisibilityHideSidebar,
+    isVisibilityHideHelp,
+    isVisibilityHideSublabel,
+    setItemControlExtension,
+    VisibilityType,
+} from '../../helpers/globalVisibilityHelper';
 import RadioBtn from '../RadioBtn/RadioBtn';
 import InputField from '../InputField/inputField';
 import { translatableSettings } from '../../helpers/LanguageHelper';
@@ -170,7 +178,12 @@ const QuestionnaireSettings = (): JSX.Element => {
                     name={'saveCapability-radio'}
                 />
             </FormField>
-            <FormField>
+            <FormField
+                label={t('PDF')}
+                sublabel={t(
+                    'Here you choose whether you want to generate a PDF and whether you want to hide some texts when the PDF is generated',
+                )}
+            >
                 <SwitchBtn
                     onChange={() =>
                         updateMetaExtension({
@@ -181,8 +194,23 @@ const QuestionnaireSettings = (): JSX.Element => {
                     value={getGeneratePdfValue()}
                     label={t('Generate PDF on submit')}
                 />
+                <CheckboxBtn
+                    onChange={() => setItemControlExtension(qMetadata, VisibilityType.hideHelp, dispatch)}
+                    value={isVisibilityHideHelp(qMetadata)}
+                    label={t('Hide help texts in PDF')}
+                />
+                <CheckboxBtn
+                    onChange={() => setItemControlExtension(qMetadata, VisibilityType.hideSublabel, dispatch)}
+                    value={isVisibilityHideSublabel(qMetadata)}
+                    label={t('Hide sublabels in PDF')}
+                />
+                <CheckboxBtn
+                    onChange={() => setItemControlExtension(qMetadata, VisibilityType.hideSidebar, dispatch)}
+                    value={isVisibilityHideSidebar(qMetadata)}
+                    label={t('Hide sidebar texts in PDF')}
+                />
             </FormField>
-            <FormField>
+            <FormField label={t('Navigation')} sublabel={t('Choose whether to use the navigator')}>
                 <SwitchBtn
                     onChange={() => {
                         const hasNavigatorExtension = !!qMetadata?.extension?.find(
@@ -207,7 +235,7 @@ const QuestionnaireSettings = (): JSX.Element => {
                         }
                     }}
                     value={!!qMetadata?.extension?.find((ex) => ex.url === IExtentionType.navigator) || false}
-                    label={t('Use navigator')}
+                    label={t('Navigator')}
                 />
             </FormField>
         </Accordion>

@@ -39,6 +39,7 @@ import {
     canTypeHaveSublabel,
     getItemDisplayType,
 } from '../../helpers/questionTypeFeatures';
+import { erRenderingOption } from '../../helpers/codeHelper';
 
 interface QuestionProps {
     item: QuestionnaireItem;
@@ -54,7 +55,10 @@ interface QuestionProps {
 const Question = (props: QuestionProps): JSX.Element => {
     const { t } = useTranslation();
     const [isMarkdownActivated, setIsMarkdownActivated] = React.useState<boolean>(!!props.item._text);
-    const codeElements = props.item.code ? `(${props.item.code.length})` : '(0)';
+    const codeElements = props.item.code
+        ? `(${props.item.code.filter((value) => !erRenderingOption(value)).length})`
+        : '(0)';
+
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const removeMd = require('remove-markdown');
 
@@ -80,7 +84,6 @@ const Question = (props: QuestionProps): JSX.Element => {
 
     const convertToPlaintext = (stringToBeConverted: string) => {
         let plainText = removeMd(stringToBeConverted);
-        plainText = plainText.replaceAll('\\*', '*');
         plainText = plainText.replaceAll('\\', '');
         plainText = plainText.replaceAll(/([ \n])+/g, ' ');
         return plainText;
@@ -227,7 +230,12 @@ const Question = (props: QuestionProps): JSX.Element => {
                     <Codes linkId={props.item.linkId} itemValidationErrors={props.itemValidationErrors} />
                 </Accordion>
                 <Accordion title={t('Advanced settings')}>
-                    <AdvancedQuestionOptions item={props.item} parentArray={props.parentArray} />
+                    <AdvancedQuestionOptions
+                        item={props.item}
+                        parentArray={props.parentArray}
+                        conditionalArray={props.conditionalArray}
+                        getItem={props.getItem}
+                    />
                 </Accordion>
             </div>
         </div>

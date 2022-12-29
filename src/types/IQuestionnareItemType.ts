@@ -79,6 +79,11 @@ export enum IValueSetSystem {
     hyperlinkTargetValueset = 'http://helsenorge.no/fhir/ValueSet/sdf-hyperlink-target',
 }
 
+export enum ICodeSystem {
+    renderOptionsCodeSystem = 'http://helsenorge.no/fhir/CodeSystem/RenderOptions',
+    attachmentRenderOptions = 'http://helsenorge.no/fhir/CodeSystem/AttachmentRenderOptions',
+}
+
 export enum IExtentionType {
     authenticationRequirement = 'http://ehelse.no/fhir/StructureDefinition/sdf-authenticationrequirement',
     calculatedExpression = 'http://ehelse.no/fhir/StructureDefinition/sdf-calculatedExpression',
@@ -113,6 +118,8 @@ export enum IExtentionType {
     saveCapability = 'http://helsenorge.no/fhir/StructureDefinition/sdf-save-capabilities',
     printVersion = 'http://helsenorge.no/fhir/StructureDefinition/sdf-questionnaire-print-version',
     hyperlinkTarget = 'http://helsenorge.no/fhir/StructureDefinition/sdf-hyperlink-target',
+    globalVisibility = 'http://helsenorge.no/fhir/StructureDefintion/sdf-itemControl-visibility',
+    copyExpression = 'http://hl7.org/fhir/StructureDefinition/cqf-expression',
 }
 
 export enum UseContextSystem {

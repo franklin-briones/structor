@@ -1,4 +1,5 @@
 import './index.css';
+import './components/Refero/styles/refero.scss';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -10,6 +11,7 @@ import './helpers/i18n';
 //import { debugContextDevtool } from 'react-context-devtool';
 
 const container = document.getElementById('root');
+container?.classList.add('root');
 
 ReactDOM.render(
     <React.StrictMode>

@@ -50,7 +50,7 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-#root {
+.root {
     text-align: center;
     height: 100%;
 }
@@ -88,25 +88,6 @@ p {
     box-shadow: 0 4px 8px 4px #c7c7c7c7;
     border-radius: 2px;
     display: inline-block;
-}
-
-.iframe-div {
-    font-family: Source Sans Pro, Arial, Verdana, sans-serif;
-    background-color: #f5f3f3;
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-}
-
-.iframe-div h2 {
-    color: black;
-    margin-top: 70px;
-    text-align: left;
-    font-size: 42px;
-    padding-left: 20px;
-    font-weight: 700;
 }
 
 .index-buttons {
